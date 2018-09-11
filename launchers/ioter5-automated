@@ -1,0 +1,18 @@
+#!/usr/bin/env checkbox-cli-wrapper
+[launcher]
+app_id = com.canonical.certification:checkbox-vienna
+launcher_version = 1
+stock_reports = text, submission_files
+
+[test plan]
+unit = com.canonical.qa.vienna::ioter5-qa-automated
+forced = yes
+
+[test selection]
+forced = yes
+
+[ui]
+type = silent
+
+[config]
+config_filename = /home/$USER/checkbox.conf

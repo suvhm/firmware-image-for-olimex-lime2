@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if ! snap list &> /dev/null || ! snap list $SNAP_NAME | grep devmode > /dev/null
+then
+    echo "$SNAP_NAME must be installed with --devmode to function properly!"
+    exit 1
+fi
+
+. $(dirname "$(realpath $BASH_SOURCE)")/wrapper_common
+
+cd $HOME
+exec python3 $(which checkbox-cli) "$@"

@@ -1,0 +1,115 @@
+id: ioter5-qa-full
+unit: test plan
+_name: ioter5 full
+_description:
+ QA test plan that includes all tests for ioter5 devices.
+estimated_duration: 1h
+include:
+    com.canonical.certification::monitor/hdmi
+    com.canonical.certification::disk/encryption/detect
+    com.canonical.certification::miscellanea/secure_boot_mode_.*
+    com.canonical.certification::snappy/os-refresh
+    com.canonical.certification::snappy/os-revert
+mandatory_include:
+    com.canonical.plainbox::collect-manifest
+    com.canonical.plainbox::manifest
+    com.canonical.certification::dpkg
+    com.canonical.certification::interface
+    com.canonical.certification::lsb
+    com.canonical.certification::lsusb_attachment
+    com.canonical.certification::meminfo
+    com.canonical.certification::package
+    com.canonical.certification::snap
+    com.canonical.certification::udev_attachment
+    com.canonical.certification::udev_json
+    com.canonical.certification::uname
+    com.canonical.certification::model_assertion
+    com.canonical.certification::serial_assertion
+    com.canonical.certification::parts_meta_info_attachment
+    com.canonical.certification::info/buildstamp
+bootstrap_include:
+    com.canonical.certification::cpuinfo
+    com.canonical.certification::device
+    com.canonical.certification::serial_ports_static
+nested_part:
+    vienna-connections-tp
+    com.canonical.certification::usb-full
+    com.canonical.certification::snappy-snap-automated
+    com.canonical.certification::wireless-cert-automated
+    com.canonical.certification::bluetooth-full
+    com.canonical.certification::cpu-automated
+    com.canonical.certification::disk-automated
+    com.canonical.certification::ethernet-full
+    com.canonical.certification::memory-automated
+    com.canonical.certification::serial-automated
+
+id: ioter5-qa-automated
+unit: test plan
+_name: ioter5 automated tests
+_description:
+ QA test plan that includes all automated tests for ioter5 devices.
+estimated_duration: 1h
+include:
+    com.canonical.certification::disk/encryption/detect
+    com.canonical.certification::miscellanea/secure_boot_mode_.*
+mandatory_include:
+    com.canonical.plainbox::manifest
+    com.canonical.certification::alsa_resource
+    com.canonical.certification::dpkg
+    com.canonical.certification::interface
+    com.canonical.certification::lsb
+    com.canonical.certification::lsusb_attachment
+    com.canonical.certification::meminfo
+    com.canonical.certification::package
+    com.canonical.certification::snap
+    com.canonical.certification::udev_attachment
+    com.canonical.certification::udev_json
+    com.canonical.certification::uname
+    com.canonical.certification::model_assertion
+    com.canonical.certification::serial_assertion
+    com.canonical.certification::parts_meta_info_attachment
+    com.canonical.certification::info/buildstamp
+bootstrap_include:
+    com.canonical.certification::cpuinfo
+    com.canonical.certification::device
+    com.canonical.certification::serial_ports_static
+nested_part:
+    vienna-connections-tp
+    com.canonical.certification::snappy-snap-automated
+    com.canonical.certification::wireless-cert-automated
+    com.canonical.certification::bluez-automated
+    com.canonical.certification::cpu-automated
+    com.canonical.certification::disk-automated
+    com.canonical.certification::ethernet-automated
+    com.canonical.certification::memory-automated
+    com.canonical.certification::serial-automated
+    com.canonical.certification::usb-preinserted
+
+id: vienna-connections-tp
+unit: test plan
+_name: Test plan that connects all checkbox-vienna plugs
+_description:
+ This test plan is necessary to assure the proper ordering of resource jobs
+ being run
+estimated_duration: 60
+bootstrap_include:
+ connect-vienna-plugs
+include:
+
+id: connect-vienna-plugs
+estimated_duration: 60
+plugin: resource
+user: root
+command:
+    snap_connect.py \
+        bluez:bluez:service \
+        bluetooth-control:core:bluetooth-control \
+        hardware-observe:core:hardware-observe \
+        home:core:home \
+        mount-observe:core:mount-observe \
+        network-bind:core:network-bind \
+        system-observe:core:system-observe \
+        network-manager:network-manager:service
+    # modem-manager:modem-manager:service
+_summary: Connect all the vienna specific plugs
+_description: Connect all the vienna specific plugs

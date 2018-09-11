@@ -1,0 +1,12 @@
+OPEN_N_SSID=ubuntu-cert-n-open
+OPEN_BG_SSID=ubuntu-cert-bg-open
+OPEN_AC_SSID=ubuntu-cert-ac-open
+WPA_N_SSID=ubuntu-cert-n-wpa
+WPA_BG_SSID=ubuntu-cert-bg-wpa
+WPA_AC_SSID=ubuntu-cert-ac-wpa
+WPA_N_PSK=insecure
+WPA_BG_PSK=insecure
+WPA_AC_PSK=insecure
+OBEX_TARGET=00:02:72:C5:F9:1F
+STORE_ID=It4ooghiesh6Ob6shaYa
+SERIAL_PORTS_STATIC=

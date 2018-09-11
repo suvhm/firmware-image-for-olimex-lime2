@@ -1,0 +1,8 @@
+#!/usr/bin/env checkbox-cli-wrapper
+[launcher]
+app_id = com.canonical.certification:checkbox-vienna
+launcher_version = 1
+stock_reports = text, submission_files, certification
+
+[test plan]
+filter = *com.canonical.qa.vienna::ioter5-*

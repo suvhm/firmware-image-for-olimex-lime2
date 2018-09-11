@@ -1,0 +1,21 @@
+unit: test plan
+id: my-project-custom
+_name: Northstar-Feature-Automation
+_description:
+    This test plan includes all test related to Northstart Release
+estimated_duration: 1h
+include:
+   PC_Obtains_Address_via_DHCP_from_IOTR 
+   IOTR_Configuration
+   IoTR_NIC_Setting
+   SSH_Login
+   Test-Hello-World
+   IPv4_connectivity_to_Internet    
+   Time_Sync_Accuracy
+   IoTR_able_to_scan_other_IoTRs_and_APs  
+   IOTR_registered_to_Access_Point
+   Curl_to_internet_from_connected_pc
+   IoTR_updates_the_timesync_information
+   snap_login
+   itron-store
+   snap_refresh

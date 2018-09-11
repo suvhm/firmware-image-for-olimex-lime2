@@ -1,0 +1,11 @@
+unit: category
+id: provisioning
+_name: Device Provisioning
+
+unit: category
+id: edge_mode_test
+_name: Northstar Edge-Mode
+
+unit: category 
+id: ubuntu_store_functionality
+_name: Ubuntu Core New Functionality

@@ -1,0 +1,60 @@
+id: snap_login
+_summary: Verify connection with snap store 
+plugin: manual
+category_id: ubuntu_store_functionality
+estimated_duration: 5s
+_description:
+  PURPOSE:
+       this test case will verify weather IoTR device are able to connect to ITRON-Sanbox with the account created on ubuntu core
+  STEPS:
+     1. Connect your PC to IoTR via Ethernet cable before boot.
+     2. Boot into system
+     3. ssh the device from other machine in same network
+        [ ssh Ubuntu_SSO_user_name@device_ IP_address ]
+     4. Login with the account created on ubuntu core
+        [ sudo snap login  Ubuntu_SSO_email_address ]
+     5. Check it’s able to see the itron snaps available in the itron store
+        [ snap find itron ]
+   VERIFICATION:
+     Did all the steps work?
+
+id: itron-store
+_summary: Verify the itron snaps available in the itron store
+_description:
+  Check it’s able to see the itron snaps available in the itron store
+plugin: shell
+category_id: ubuntu_store_functionality
+estimated_duration: 30s
+command:
+   out=$(snap find itron | awk '{print $1}' )
+   check=$(cut -d '-' -f1 <<<"$out" | head -1 )
+   if [ -n $check ]
+   then
+     echo "itron snaps available in the itron store"
+   else
+     echo "itron snaps not available in the itron store"
+     exit 1
+   fi
+
+id: snap_refresh
+_summary: Verify snap refresh are able to update the snaps from itron-snap store
+_description:
+   Check that IoTR is able to update the snaps from the Itron-Sandbox-2 store
+plugin: shell
+category_id: ubuntu_store_functionality
+estimated_duration: 120s
+command:
+  snap revert itron-edge
+  before=$(snap list | grep "itron-edge" | awk '{print $3}')
+  snap refresh itron-edge --amend
+  after=$(snap list | grep "itron-edge" | awk '{print $3}')
+  if [ $after != $before ]
+  then
+    echo "snap refreshed"
+  else
+    echo "snap refresh  failed"
+    exit 1
+  fi
+
+
+

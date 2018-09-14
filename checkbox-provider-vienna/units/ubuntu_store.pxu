@@ -30,7 +30,8 @@ command:
    check=$(cut -d '-' -f1 <<<"$out" | head -1 )
    if [ -n $check ]
    then
-     echo "itron snaps available in the itron store"
+     echo "itron snaps are available in itron store"
+     echo "Command: snap find itron" && snap find itron
    else
      echo "itron snaps not available in the itron store"
      exit 1
@@ -44,15 +45,19 @@ plugin: shell
 category_id: ubuntu_store_functionality
 estimated_duration: 120s
 command:
-  snap revert itron-edge
+  before_revert=$(snap list | grep "itron-edge" | awk '{print $3}')
+  echo "before revert itron-edge snap version: $before_revert"
+  echo "Commad: snap revert itron-edge" && snap revert itron-edge
   before=$(snap list | grep "itron-edge" | awk '{print $3}')
-  snap refresh itron-edge --amend
+  echo "after revert itron-edge snap version: $before "
+  echo "snap refresh itron-edge" && snap refresh itron-edge --amend
   after=$(snap list | grep "itron-edge" | awk '{print $3}')
+  echo "after snap refresh itron-edge snap version: $after"
   if [ $after != $before ]
   then
     echo "snap refreshed"
   else
-    echo "snap refresh  failed"
+    echo "snap failed to refresh"
     exit 1
   fi
 

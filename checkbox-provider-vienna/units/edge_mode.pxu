@@ -6,7 +6,7 @@ plugin: shell
 category_id: edge_mode_test
 estimated_duration: 5s
 command:
-  itron-edge.netmgr -i nodeq 0
+  echo "Command: itron-edge.netmgr -i nodeq 0" && itron-edge.netmgr -i nodeq 0
   itron-edge.netmgr -i nodeq 0 | head -1 | awk '{if($3 == 0) exit 1}'
 
 id: IOTR_registered_to_Access_Point
@@ -17,7 +17,7 @@ plugin: shell
 estimated_duration: 5s
 category_id: edge_mode_test
 command:
-  itron-edge.netmgr -i nodeq 0
+  echo "Command: itron-edge.netmgr -i nodeq 0" &&  itron-edge.netmgr -i nodeq 0
   itron-edge.netmgr -i nodeq 0 | head -1 | awk '{if($3 == 0) exit 1}'
 
 id: Time_Sync_Accuracy
@@ -28,7 +28,7 @@ plugin: shell
 estimated_duration: 5s
 category_id: edge_mode_test
 command:
-  itron-edge.netmgr -i conf timesync ts_accuracy_req
+  echo "Command: itron-edge.netmgr -i conf timesync ts_accuracy_req" && itron-edge.netmgr -i conf timesync ts_accuracy_req
   itron-edge.netmgr -i conf timesync ts_accuracy_req | head -1 | awk '{if($8 != 1200) exit 1}' 
 
 id: IPv4_connectivity_to_Internet 
@@ -39,7 +39,7 @@ plugin: shell
 estimated_duration: 5s
 category_id: edge_mode_test
 command:
-  ping -c 2 8.8.8.8
+  echo "Checking connectivity to internet by pinging google DNS server" &&  ping -c 2 8.8.8.8
   ping -c 2 8.8.8.8 | tail -2 | head -1 | awk '{if($4 != 2) exit 1}'
 
 id: IoTR_updates_the_timesync_information
@@ -91,9 +91,11 @@ command:
   if [ -n $output ]
   then
     print "curl already installed" 
-    cd /home/manish2359 && curl -O https://github.com/sikilli/blob/develop/build-linux.txt && rm build-linux.txt && cd -
+    echo "cd /home/manish2359/snap && curl -O https://github.com/sikilli/blob/develop/build-linux.txt && rm build-linux.txt && cd -"
+    cd /home/manish2359/snap && curl -O https://github.com/sikilli/blob/develop/build-linux.txt && rm build-linux.txt && cd -
   else
     snap install curl
+    echo "cd /home/manish2359 && curl -O https://github.com/sikilli/blob/develop/build-linux.txt && rm build-linux.txt && cd -"
     cd /home/manish2359 && curl -O https://github.com/sikilli/blob/develop/build-linux.txt && rm build-linux.txt && cd -
   fi
   

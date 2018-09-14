@@ -68,9 +68,10 @@ command:
   output=$(snap list | grep hello-world | awk '{print $1}') 
   if [ -n $output ]
   then
-     snap remove hello-world && snap install hello-world
+     snap remove hello-world && snap install hello-world && echo "Hello-World snap installed"
   else
     snap install hello-world
+    echo "Hello-World snap installed"
   fi
 
 id: SSH_Login
